@@ -28,7 +28,7 @@ class BaseSettings(Settings):
 
     SECRET_KEY = env('SECRET_KEY')
 
-
+    AUTH_USER_MODEL = 'custom_user.User'
 
     # Debug settings
     DEBUG = env('DEBUG')
@@ -49,7 +49,7 @@ class BaseSettings(Settings):
     ]
 
     SHARED_PROJECT_APPS = [
-
+        'ahkin_pagos.apps.custom_user'
     ]
 
     THIRD_PARTY_APPS = [
