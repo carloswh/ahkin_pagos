@@ -21,6 +21,8 @@ urlpatterns = [
 ]
 
 urlpatterns += i18n_patterns(
+    url('', include('ahkin_pagos.apps.finanzas_admin.urls')),
+    url('', include('ahkin_pagos.apps.custom_user.urls')),
     url('api/', include('ahkin_pagos.core.urls.urls_api')),
 )
 
