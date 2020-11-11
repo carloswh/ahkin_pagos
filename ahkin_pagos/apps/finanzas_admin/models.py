@@ -179,3 +179,29 @@ class Pago(models.Model):
     facturas_aplicadas = models.ManyToManyField('finanzas_admin.Factura', blank=True)
     cliente = models.ForeignKey(User, on_delete=models.SET_NULL, related_name="cliente_pago", null=True,
                                 verbose_name="Usuario asignado")
+
+
+class Credito(models.Model):
+
+    SIN_FACTURAR = 0
+    FACTURADO = 1
+    CANCELADO = 2
+    PARCIAL = 3
+    ESTADO_PAGO = (
+        (SIN_FACTURAR, 'Sin facturar'),
+        (FACTURADO, 'Facturado'),
+        (CANCELADO, 'Cancelado'),
+        (PARCIAL, 'Parcial')
+    )
+    estado = models.PositiveSmallIntegerField(choices=ESTADO_PAGO, default=SIN_FACTURAR, db_index=True)
+    tipo_cambio = models.DecimalField(max_digits=10, decimal_places=2)
+    total = models.DecimalField(max_digits=10, decimal_places=2)
+    fecha_emision = models.DateField()
+    fecha_vencimiento = models.DateField()
+    fecha_pago = models.DateField()
+    detalles = models.TextField(null=True, blank=True, verbose_name="Detalles", editable=False)
+
+    factura = models.ForeignKey('finanzas_admin.Factura', on_delete=models.CASCADE,
+                                related_name='credito_factura', null=True, editable=False)
+    cliente = models.ForeignKey(User, on_delete=models.SET_NULL, related_name="cliente_credito", null=True,
+                                verbose_name="Usuario asignado")
