@@ -28,7 +28,7 @@ class BaseSettings(Settings):
 
     SECRET_KEY = env('SECRET_KEY')
 
-
+    AUTH_USER_MODEL = 'custom_user.User'
 
     # Debug settings
     DEBUG = env('DEBUG')
@@ -49,7 +49,9 @@ class BaseSettings(Settings):
     ]
 
     SHARED_PROJECT_APPS = [
-
+        'ahkin_pagos.apps.custom_user',
+        'ahkin_pagos.apps.commons',
+        'ahkin_pagos.apps.finanzas_admin'
     ]
 
     THIRD_PARTY_APPS = [
@@ -92,6 +94,7 @@ class BaseSettings(Settings):
     # Database
     # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
+    '''
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql',
@@ -104,6 +107,13 @@ class BaseSettings(Settings):
                 #"init_command": "SET storage_engine=InnoDB",
                 #"init_command": "SET GLOBAL max_connections = 100000",
             }
+        }
+    }
+    '''
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
         }
     }
 
