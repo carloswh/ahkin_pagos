@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 
 from django.contrib import admin
-from .models import Factura, TipoCambio, Transaction, Articulo
+from .models import Factura, TipoCambio, Transaction, Articulo, Credito, Pago
 
 
 class ArticuloInLine(admin.TabularInline):
@@ -56,3 +56,17 @@ class TransactionInline(admin.TabularInline):
 
     def has_change_permission(self, request, obj=None):
         return False
+
+
+@admin.register(Credito)
+class CreditoAdmin(admin.ModelAdmin):
+    list_display = ('id', 'estado', 'fecha_pago')
+    search_fields = ('id', 'estado', 'forma_pago')
+
+
+@admin.register(Pago)
+class PagoAdmin(admin.ModelAdmin):
+    list_display = ('id', 'estado', 'fecha_pago')
+    list_select_related = ('forma_pago',)
+    raw_id_fields = list_select_related
+    search_fields = ('id', 'estado', 'forma_pago')
