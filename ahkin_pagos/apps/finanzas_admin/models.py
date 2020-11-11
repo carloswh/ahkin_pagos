@@ -130,3 +130,52 @@ class TipoCambio(models.Model):
 
     def __str__(self):
         return u"{0}={1}".format(self.nombre, self.valor)
+
+
+class Pago(models.Model):
+    SIN_FACTURAR = 0
+    FACTURADO = 1
+    CANCELADO = 2
+    PARCIAL = 3
+    ESTADO_PAGO = (
+        (SIN_FACTURAR, 'Sin facturar'),
+        (FACTURADO, 'Facturado'),
+        (CANCELADO, 'Cancelado'),
+        (PARCIAL, 'Parcial')
+    )
+    CARGO = 0
+    ABONO = 1
+    TIPO_PAGO = (
+        (CARGO, 'Cargo'),
+        (ABONO, 'Abono')
+    )
+    CURRENCIES = (
+        (1, 'USD'),
+        (2, 'MEX'),
+        (3, 'COP'),
+        (4, 'EUR'),
+        (5, 'PEN'),
+        (6, 'GTQ'),
+    )
+    fecha_emision = models.DateField()
+    fecha_vencimiento = models.DateField()
+    fecha_pago = models.DateField()
+    estado = models.PositiveSmallIntegerField(choices=ESTADO_PAGO, default=SIN_FACTURAR, db_index=True)
+    tipo_pago = models.PositiveSmallIntegerField(choices=TIPO_PAGO, default=CARGO, db_index=True)
+    tipo_cambio = models.DecimalField(max_digits=10, decimal_places=2)
+    currency = models.PositiveSmallIntegerField(verbose_name='Divisa Origen', choices=CURRENCIES, editable=False)
+    detalles = models.TextField(null=True, blank=True, verbose_name="Detalles", editable=False)
+    created = models.DateField(auto_now_add=True, editable=False, verbose_name="Fecha de Creación")
+
+    total = models.DecimalField(max_digits=10, decimal_places=2)
+    total_mxn = models.DecimalField(max_digits=10, decimal_places=2)
+    total_pagado = models.DecimalField(max_digits=10, decimal_places=2, default=0)
+    residuo = models.DecimalField(max_digits=10, decimal_places=2, default=0)
+
+    forma_pago = models.ForeignKey("commons.FormaPago", verbose_name="Forma de Pago", on_delete=models.SET_NULL,
+                                   null=True, editable=False, related_name="forma_pago_pagos")
+    factura = models.ForeignKey('finanzas_admin.Factura', on_delete=models.CASCADE,
+                                related_name='pago_factura', null=True, editable=False)
+    facturas_aplicadas = models.ManyToManyField('finanzas_admin.Factura', blank=True)
+    cliente = models.ForeignKey(User, on_delete=models.SET_NULL, related_name="cliente_pago", null=True,
+                                verbose_name="Usuario asignado")

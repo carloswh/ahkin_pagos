@@ -18,13 +18,10 @@ from django.views.decorators.cache import never_cache
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-]
-
-urlpatterns += i18n_patterns(
     url('', include('ahkin_pagos.apps.finanzas_admin.urls')),
     url('', include('ahkin_pagos.apps.custom_user.urls')),
     url('api/', include('ahkin_pagos.core.urls.urls_api')),
-)
+]
 
 if settings.DEBUG:
     from django.conf.urls.static import static
