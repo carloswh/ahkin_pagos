@@ -1,6 +1,7 @@
 {% extends "base.html"%}
 {% load static from staticfiles %}
 {% load i18n %}
+{% load widget_tweaks %}
 {%  block title %}Ahkin Pagos{% endblock %}
 
 <html>
@@ -21,15 +22,32 @@
                                             <h1 class="h4 text-gray-900 mb-4">Ahkin Pagos</h1>
                                         </div>
                                         <!-- Poner form login aqui -->
-                                        <form class="user">
+                                        <form class="user" method="post">
+                                            {% csrf_token %}{{ form.non_field_errors }}
                                             <div class="form-group">
-                                            <input type="email" class="form-control form-control-user"
-                                                id="exampleInputEmail" aria-describedby="emailHelp"
-                                                placeholder="Enter Email Address...">
+                                                <div class="controls with-icon-over-input">
+                                                    {% render_field form.username class="form-control" placeholder='username' %}
+                                                    <div class="django-error-field">
+                                                        {{ form.username.field_errors }}
+                                                        {{ form.username.errors }}
+                                                    </div>
+                                                </div>
                                             </div>
                                             <div class="form-group">
-                                                <input type="password" class="form-control form-control-user"
-                                                    id="exampleInputPassword" placeholder="Password">
+                                                <div class="controls with-icon-over-input">
+                                                    {% render_field form.password class="form-control" placeholder='Password' type="password" %}
+                                                    <div class="django-error-field">
+                                                        {{ form.password.field_errors }}
+                                                        {{ form.password.errors }}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="text-center">
+                                                <a class="small" href="{% url 'registro-empresa' %}">Crea una cuenta</a>
+                                            </div>
+
+                                            <div class="text-center">
+                                                <button class="btn btn-success btn-user btn-block" type="submit">{% trans "Log In" %}</button>
                                             </div>
                                         </form>
                                     </div>

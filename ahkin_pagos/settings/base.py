@@ -46,6 +46,7 @@ class BaseSettings(Settings):
         'django.contrib.sessions',
         'django.contrib.messages',
         'django.contrib.staticfiles',
+        'django.contrib.sites',
     ]
 
     SHARED_PROJECT_APPS = [
@@ -56,8 +57,14 @@ class BaseSettings(Settings):
     ]
 
     THIRD_PARTY_APPS = [
+        'widget_tweaks',
         'debug_toolbar',
+        'allauth',
+        'allauth.account',
+        'allauth.socialaccount',
     ]
+
+    SITE_ID = 1
 
     # Installed apps deben estan todas las apps, tenant, shared, externats y las default de django(admin, auth...)
     INSTALLED_APPS = BEFORE_DJANGO_APPS + SHARED_PROJECT_APPS + DJANGO_APPS + THIRD_PARTY_APPS

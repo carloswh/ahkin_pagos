@@ -19,7 +19,7 @@
                                     <tr>
                                         <th>#</th>
                                         <th>Nombre</th>
-                                        <th>Estados</th>
+                                        <th>Estado</th>
                                         <th>País</th>
                                         <th>Dirección</th>
                                         <th>Teléfono</th>
@@ -30,7 +30,7 @@
                                     <tr>
                                         <th>#</th>
                                         <th>Nombre</th>
-                                        <th>Estados</th>
+                                        <th>Estado</th>
                                         <th>País</th>
                                         <th>Dirección</th>
                                         <th>Teléfono</th>
@@ -40,14 +40,13 @@
                                  <tbody>
                                     {% for empresa in list_empresa %}
                                     <tr>
-                                        <th>{{ empresa.id }}</th>
-                                        <th> - - - </th>
-                                        <th>{{ empresa.nombre }}</th>
-                                        <th>{{ empresa.estados }}</th>
-                                        <th>{{ empresa.pais }}</th>
-                                        <th>{{ empresa.direccion }}</th>
-                                        <th>{{ empresa.telefono }}</th>
-                                        <th>{{ empresa.email }}</th>
+                                        <td>{{ empresa.id }}</td>
+                                        <td>{{ empresa.nombre }}</td>
+                                        <td>{{ empresa.is_active }}</td>
+                                        <td>{{ empresa.pais }}</td>
+                                        <td>{{ empresa.direccion }}</td>
+                                        <td>{{ empresa.telefono }}</td>
+                                        <td>{{ empresa.email }}</td>
                                     </tr>
                                     {% endfor %}
                                  </tbody>

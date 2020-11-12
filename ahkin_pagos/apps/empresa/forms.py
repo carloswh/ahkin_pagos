@@ -4,10 +4,17 @@ from django.contrib.auth.models import Group
 from django.template.defaultfilters import slugify
 
 from ahkin_pagos.apps.empresa.models import Empresa
+from ahkin_pagos.apps.custom_user.models import User
 
 
-class NewSignUpForm(forms.Form):
-    nombre_empresa = forms.CharField(max_length=30, label='Nombre empresa', widget=forms.TextInput(attrs={'placeholder': '¿Como se llama su empresa?', 'class': 'form-control', 'data-rule-required': "true"}) )
+class NewSignUpForm(forms.ModelForm):
+    nombre_empresa = forms.CharField(max_length=30, label='Nombre empresa', widget=forms.TextInput(
+        attrs={'placeholder': 'Nombre Empresa', 'class': 'form-control', 'data-rule-required': "true"}))
+    password = forms.CharField(label='Password Portal Cliente')
+
+    class Meta:
+        model = Empresa
+        fields = ['nombre_empresa', 'email', 'password']
 
     def clean(self):
         cleaned_data = super(NewSignUpForm, self).clean()
@@ -20,9 +27,9 @@ class NewSignUpForm(forms.Form):
 
         return cleaned_data
 
-    def signup(self, request, user):
+    def save(self, commit=True):
         # Se crea empresa
-        nueva_empresa = Empresa()
+        nueva_empresa = super(NewSignUpForm, self).save(commit=False)
         nueva_empresa.nombre = self.cleaned_data['nombre_empresa']
         nueva_empresa.slug = slugify(self.cleaned_data['nombre_empresa'])
 
@@ -40,7 +47,12 @@ class NewSignUpForm(forms.Form):
         nueva_empresa.email = self.cleaned_data['email']
         nueva_empresa.save()
 
-        user.username = "admin@%s" % nueva_empresa.slug
+        user = User.objects.create_user(
+            username="admin@%s" % nueva_empresa.slug,
+            email=self.cleaned_data['email'],
+            # company=company,
+        )
+        user.set_password(self.cleaned_data['password'])
 
         g, created = Group.objects.get_or_create(name="Administrador")
         user.groups.add(g)

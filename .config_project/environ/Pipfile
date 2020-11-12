@@ -12,6 +12,8 @@ psycopg2-binary = "==2.8.4"
 django-environ = "*"
 django-debug-toolbar = "==1.6"
 django-countries = "==4.2"
+django-allauth = "==0.35.0"
+django-widget-tweaks = "==1.4.1"
 
 [requires]
 python_version = "2.7"
