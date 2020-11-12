@@ -20,6 +20,7 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url('', include('ahkin_pagos.apps.finanzas_admin.urls')),
     url('', include('ahkin_pagos.apps.custom_user.urls')),
+    url('', include('ahkin_pagos.apps.empresa.urls')),
     url('api/', include('ahkin_pagos.core.urls.urls_api')),
 ]
 

@@ -1,0 +1,61 @@
+{% extends "sidebar.html"%}
+{% load static from staticfiles %}
+{% load i18n %}
+{% block title %}Ahkin Pagos{% endblock %}
+
+<html>
+    <div class="container-fluid">
+         {% block content %}
+             <div class="container-fluid"><br>
+                 <h1 class="h3 mb-2 text-gray-800">{{ table_name }}</h1>
+                 <div class="card shadow mb-4">
+                     <div class="card-header py-3">
+                         <h6 class="m-0 font-weight-bold text-primary">{{ table_name }}</h6>
+                     </div>
+                     <div class="card-body">
+                         <div class="table-responsive">
+                             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                 <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Nombre</th>
+                                        <th>Estados</th>
+                                        <th>País</th>
+                                        <th>Dirección</th>
+                                        <th>Teléfono</th>
+                                        <th>E-mail</th>
+                                    </tr>
+                                 </thead>
+                                 <tfoot>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Nombre</th>
+                                        <th>Estados</th>
+                                        <th>País</th>
+                                        <th>Dirección</th>
+                                        <th>Teléfono</th>
+                                        <th>E-mail</th>
+                                    </tr>
+                                 </tfoot>
+                                 <tbody>
+                                    {% for empresa in list_empresa %}
+                                    <tr>
+                                        <th>{{ empresa.id }}</th>
+                                        <th> - - - </th>
+                                        <th>{{ empresa.nombre }}</th>
+                                        <th>{{ empresa.estados }}</th>
+                                        <th>{{ empresa.pais }}</th>
+                                        <th>{{ empresa.direccion }}</th>
+                                        <th>{{ empresa.telefono }}</th>
+                                        <th>{{ empresa.email }}</th>
+                                    </tr>
+                                    {% endfor %}
+                                 </tbody>
+                             </table>
+                         </div>
+                     </div>
+                 </div>
+             </div>
+         {% endblock %}
+    </div>
+</html>

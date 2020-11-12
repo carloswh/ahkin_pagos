@@ -51,7 +51,8 @@ class BaseSettings(Settings):
     SHARED_PROJECT_APPS = [
         'ahkin_pagos.apps.custom_user',
         'ahkin_pagos.apps.commons',
-        'ahkin_pagos.apps.finanzas_admin'
+        'ahkin_pagos.apps.finanzas_admin',
+        'ahkin_pagos.apps.empresa'
     ]
 
     THIRD_PARTY_APPS = [
