@@ -1,0 +1,75 @@
+{% extends "sidebar.html"%}
+{% load static from staticfiles %}
+{% load i18n %}
+{% block title %}Ahkin Pagos{% endblock %}
+
+<html>
+    <div class="container-fluid">
+         {% block content %}
+             <div class="container-fluid"><br>
+                 <h1 class="h3 mb-2 text-gray-800">Facturas</h1>
+                 <div class="card shadow mb-4">
+                     <div class="card-header py-3">
+                         <h6 class="m-0 font-weight-bold text-primary">Tabla Facturas</h6>
+                     </div>
+                     <div class="card-body">
+                         <a href="#" class="btn btn-primary btn-circle">
+                            <i class="fas fa-plus"></i>
+                         </a>
+                         <div class="table-responsive">
+                             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                 <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Acción</th>
+                                        <th>Cliente</th>
+                                        <th>Fecha Emisión</th>
+                                        <th>Fecha Pago</th>
+                                        <th>Fecha Vencimiento</th>
+                                        <th>Total</th>
+                                        <th>Total Pagado</th>
+                                        <th>Subtotal</th>
+                                        <th>Tipo de cambio</th>
+                                        <th>Forma de pago</th>
+                                    </tr>
+                                 </thead>
+                                 <tfoot>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Acción</th>
+                                        <th>Cliente</th>
+                                        <th>Fecha Emisión</th>
+                                        <th>Fecha Pago</th>
+                                        <th>Fecha Vencimiento</th>
+                                        <th>Total</th>
+                                        <th>Total Pagado</th>
+                                        <th>Subtotal</th>
+                                        <th>Tipo de cambio</th>
+                                        <th>Forma de pago</th>
+                                    </tr>
+                                 </tfoot>
+                                 <tbody>
+                                    {% for factura in list_factura %}
+                                    <tr>
+                                        <th>{{ factura.id }}</th>
+                                        <th> - - - </th>
+                                        <th>{{ factura.cliente }}</th>
+                                        <th>{{ factura.fecha_emision }}</th>
+                                        <th>{{ factura.fecha_pago }}</th>
+                                        <th>{{ factura.fecha_vencimiento }}</th>
+                                        <th>{{ factura.total }}</th>
+                                        <th>{{ factura.total_pagado }}</th>
+                                        <th>{{ factura.subtotal }}</th>
+                                        <th>{{ factura.tipo_cambio }}</th>
+                                        <th>{{ factura.forma_pago }}</th>
+                                    </tr>
+                                    {% endfor %}
+                                 </tbody>
+                             </table>
+                         </div>
+                     </div>
+                 </div>
+             </div>
+         {% endblock %}
+    </div>
+</html>

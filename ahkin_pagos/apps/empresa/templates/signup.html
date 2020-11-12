@@ -1,0 +1,72 @@
+{% extends "base.html"%}
+{% load static from staticfiles %}
+{% load i18n %}
+{% load widget_tweaks %}
+{%  block title %}Ahkin Pagos{% endblock %}
+
+<html>
+    <body class="bg-gradient-primary">
+        {% block content %}
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-xl-10 col-lg-12 col-md-9">
+                    <div class="card o-hidden border-0 shadow-lg my-5">
+                        <div class="card-body p-0">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <img src="{% static 'img/wisphub-logo.jpg' %}" style="width: 100%">
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="p-5">
+                                        <div class="text-center">
+                                            <h1 class="h4 text-gray-900 mb-4">Ahkin Pagos</h1>
+                                        </div>
+                                        <!-- Poner form login aqui -->
+                                        <form class="user" method="post">
+                                            {% csrf_token %}{{ form.non_field_errors }}
+                                            <div class="form-group">
+                                                <div class="controls with-icon-over-input">
+                                                    {{ form.nombre_empresa }}
+                                                    <div class="django-error-field">
+                                                        {{ form.nombre_empresa.field_errors }}
+                                                        {{ form.nombre_empresa.errors }}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="controls with-icon-over-input">
+                                                    {% render_field form.email class="form-control" placeholder='Email' %}
+                                                    <div class="django-error-field">
+                                                        {{ form.email.field_errors }}
+                                                        {{ form.email.errors }}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="controls with-icon-over-input">
+                                                    {% render_field form.password class="form-control" placeholder='Password' %}
+                                                    <div class="django-error-field">
+                                                        {{ form.password.field_errors }}
+                                                        {{ form.password.errors }}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="text-center">
+                                                <a class="small" href="/accounts/login/">Iniciar Sesion</a>
+                                            </div>
+
+                                            <div class="text-center">
+                                                <button class="btn btn-success btn-user btn-block" type="submit">{% trans "Registrar" %}</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endblock %}
+    </body>
+</html>

@@ -1,0 +1,48 @@
+{% extends "sidebar.html"%}
+{% load static from staticfiles %}
+{% load i18n %}
+{% block title %}Ahkin Pagos{% endblock %}
+
+<html>
+    <div class="container-fluid">
+         {% block content %}
+             <div class="container-fluid"><br>
+                 <h1 class="h3 mb-2 text-gray-800">{{ table_name }}</h1>
+                 <div class="card shadow mb-4">
+                     <div class="card-header py-3">
+                         <h6 class="m-0 font-weight-bold text-primary">{{ table_name }}</h6>
+                     </div>
+                     <div class="card-body">
+                         <a href="#" class="btn btn-primary btn-circle">
+                            <i class="fas fa-plus"></i>
+                         </a>
+                         <div class="table-responsive">
+                             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                 <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Cliente</th>
+                                    </tr>
+                                 </thead>
+                                 <tfoot>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Cliente</th>
+                                    </tr>
+                                 </tfoot>
+                                 <tbody>
+                                    {% for cliente in list_clientes %}
+                                    <tr>
+                                        <th>{{ cliente.id }}</th>
+                                        <th>{{ cliente.username }}</th>
+                                    </tr>
+                                    {% endfor %}
+                                 </tbody>
+                             </table>
+                         </div>
+                     </div>
+                 </div>
+             </div>
+         {% endblock %}
+    </div>
+</html>

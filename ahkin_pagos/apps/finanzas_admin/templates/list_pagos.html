@@ -1,0 +1,81 @@
+{% extends "sidebar.html"%}
+{% load static from staticfiles %}
+{% load i18n %}
+{% block title %}Ahkin Pagos{% endblock %}
+
+<html>
+    <div class="container-fluid">
+         {% block content %}
+             <div class="container-fluid"><br>
+                 <h1 class="h3 mb-2 text-gray-800">{{ table_name }}</h1>
+                 <div class="card shadow mb-4">
+                     <div class="card-header py-3">
+                         <h6 class="m-0 font-weight-bold text-primary">{{ table_name }}</h6>
+                     </div>
+                     <div class="card-body">
+                         <div class="table-responsive">
+                             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                 <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Acción</th>
+                                        <th>Cliente</th>
+                                        <th>Estado</th>
+                                        <th>Tipo Pago</th>
+                                        <th>Total</th>
+                                        <th>Total MXN</th>
+                                        <th>Total Pagado</th>
+                                        <th>Residuo</th>
+                                        <th>Tipo de cambio</th>
+                                        <th>Forma Pago</th>
+                                        <th>Fecha Emisión</th>
+                                        <th>Fecha Vencimiento</th>
+                                        <th>Fecha Pago</th>
+                                    </tr>
+                                 </thead>
+                                 <tfoot>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Acción</th>
+                                        <th>Cliente</th>
+                                        <th>Estado</th>
+                                        <th>Tipo Pago</th>
+                                        <th>Total</th>
+                                        <th>Total MXN</th>
+                                        <th>Total Pagado</th>
+                                        <th>Residuo</th>
+                                        <th>Tipo de cambio</th>
+                                        <th>Forma Pago</th>
+                                        <th>Fecha Emisión</th>
+                                        <th>Fecha Vencimiento</th>
+                                        <th>Fecha Pago</th>
+                                    </tr>
+                                 </tfoot>
+                                 <tbody>
+                                    {% for pago in list_pago %}
+                                    <tr>
+                                        <th>{{ pago.id }}</th>
+                                        <th> - - - </th>
+                                        <th>{{ pago.cliente }}</th>
+                                        <th>{{ pago.estado }}</th>
+                                        <th>{{ pago.tipo_pago }}</th>
+                                        <th>{{ pago.total }}</th>
+                                        <th>{{ pago.total_mxn }}</th>
+                                        <th>{{ pago.total_pagado }}</th>
+                                        <th>{{ pago.residuo }}</th>
+                                        <th>{{ pago.tipo_cambio }}</th>
+                                        <th>{{ pago.forma_pago }}</th>
+                                        <th>{{ pago.fecha_emision }}</th>
+                                        <th>{{ pago.fecha_vencimiento }}</th>
+                                        <th>{{ pago.fecha_pago }}</th>
+                                    </tr>
+                                    {% endfor %}
+                                 </tbody>
+                             </table>
+                         </div>
+                     </div>
+                 </div>
+             </div>
+         {% endblock %}
+    </div>
+</html>
