@@ -29,6 +29,7 @@ class BaseSettings(Settings):
     SECRET_KEY = env('SECRET_KEY')
 
     AUTH_USER_MODEL = 'custom_user.User'
+    LOGIN_REDIRECT_URL = '/home/'
 
     # Debug settings
     DEBUG = env('DEBUG')

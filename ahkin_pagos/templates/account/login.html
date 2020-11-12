@@ -26,25 +26,16 @@
                                             {% csrf_token %}{{ form.non_field_errors }}
                                             <div class="form-group">
                                                 <div class="controls with-icon-over-input">
-                                                    {{ form.nombre_empresa }}
+                                                    {% render_field form.login class="form-control" placeholder='login' %}
                                                     <div class="django-error-field">
-                                                        {{ form.nombre_empresa.field_errors }}
-                                                        {{ form.nombre_empresa.errors }}
+                                                        {{ form.login.field_errors }}
+                                                        {{ form.login.errors }}
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <div class="controls with-icon-over-input">
-                                                    {% render_field form.email class="form-control" placeholder='Email' %}
-                                                    <div class="django-error-field">
-                                                        {{ form.email.field_errors }}
-                                                        {{ form.email.errors }}
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <div class="controls with-icon-over-input">
-                                                    {% render_field form.password class="form-control" placeholder='Password' %}
+                                                    {% render_field form.password class="form-control" placeholder='Password' type="password" %}
                                                     <div class="django-error-field">
                                                         {{ form.password.field_errors }}
                                                         {{ form.password.errors }}
@@ -52,11 +43,11 @@
                                                 </div>
                                             </div>
                                             <div class="text-center">
-                                                <a class="small" href="/accounts/login/">Iniciar Sesion</a>
+                                                <a class="small" href="{% url 'registro-empresa' %}">Crea una cuenta</a>
                                             </div>
 
                                             <div class="text-center">
-                                                <button class="btn btn-success btn-user btn-block" type="submit">{% trans "Registrar" %}</button>
+                                                <button class="btn btn-success btn-user btn-block" type="submit">{% trans "Log In" %}</button>
                                             </div>
                                         </form>
                                     </div>
